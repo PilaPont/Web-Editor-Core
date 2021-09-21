@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="assets_wysiwyg" name="web editor wysiwyg Assets" inherit_id="web_editor.assets_wysiwyg">
+        <xpath expr="//script[last()]" position="after">
+            <script type="text/javascript"
+                    src="/web_editor_core/static/src/js/wysiwyg/widgets/patch_media.js"></script>
+        </xpath>
+    </template>
+
+</odoo>
