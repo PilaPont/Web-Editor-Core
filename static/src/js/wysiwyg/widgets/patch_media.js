@@ -8,7 +8,8 @@ odoo.define('web_editor_core.Patch.wysiwyg.widgets.media', function (require) {
             let res = this._super.apply(this, arguments);
             if (res.type === undefined) {
                 const regexes = {
-                    aparat: /^(?:(?:https?:)?\/\/)?(?:www\.)?(?:aparat?\.com\/(?:video\/video\/embed\/videohash\/|v\/))([^\/]*).*/,
+                    aparat: /^(?:(?:https?:)?\/\/)?(?:www\.)?(?:aparat?\.com\/(?:video\/video\/embed\/videohash\/|v\/))([^\/]+).*/,
+                    tamasha: /^(?:(?:https?:)?\/\/)?(?:www\.)?(?:tamasha?\.com\/(?:embed\/|v\/))([^\/]+).*/,
                 };
                 const matches = _.mapObject(regexes, regex => url.match(regex));
 
@@ -16,6 +17,12 @@ odoo.define('web_editor_core.Patch.wysiwyg.widgets.media', function (require) {
                     res = {
                         embedURL: `//www.aparat.com/video/video/embed/videohash/${matches.aparat[1]}/vt/frame`,
                         type: 'aparat'
+                    };
+                }
+                else if (matches.tamasha && matches.tamasha[1].length) {
+                    res = {
+                        embedURL: `//www.tamasha.com/embed/${matches.tamasha[1]}`,
+                        type: 'tamasha'
                     };
                 }
             }
